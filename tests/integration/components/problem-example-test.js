@@ -1,6 +1,6 @@
 import {module, test} from 'qunit';
 import {setupRenderingTest} from 'ember-qunit';
-import {render, triggerEvent} from '@ember/test-helpers';
+import {render, triggerEvent, settled} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | problem-example', function (hooks) {
@@ -13,7 +13,7 @@ module('Integration | Component | problem-example', function (hooks) {
         const contentType = {type: 'image/jpg'};
         const dispatchedFiles = [new File([], 'cat.jpg', contentType)];
         await triggerEvent('input[type="file"]', 'change', {files: dispatchedFiles});
-
+        await settled();
         assert.equal(this.element.querySelector('.file') !== null, true);
 
     });
